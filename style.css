@@ -1,30 +1,89 @@
 /* Tailwind CSS 自定义配置通过JS加载 */
 
+/* 全局样式重置 */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* 页面基础样式 */
+body {
+  transition: all 0.8s ease-in-out;
+}
+
+/* 容器样式增强 */
+.container {
+  backdrop-filter: blur(10px);
+}
+
 /* 自定义工具类 */
 .weather-card {
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
   border-radius: 1rem;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
   padding: 1.5rem;
   transition: all 300ms ease;
 }
 
+/* 暗色背景下的卡片样式 */
+body[class*="from-blue-900"],
+body[class*="from-gray-800"],
+body[class*="from-gray-900"],
+body[class*="from-purple-900"] {
+  .weather-card {
+    background-color: rgba(30, 30, 45, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    color: #e0e0e0;
+  }
+}
+
 .weather-card:hover {
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.25);
+  transform: translateY(-2px);
 }
 
 .search-input {
   width: 100%;
   padding: 0.75rem 1rem;
   border-radius: 9999px;
-  border: 1px solid #e5e7eb;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.9);
   transition: all 200ms ease;
+}
+
+/* 暗色背景下的输入框 */
+body[class*="from-blue-900"],
+body[class*="from-gray-800"],
+body[class*="from-gray-900"],
+body[class*="from-purple-900"] {
+  .search-input {
+    background-color: rgba(40, 40, 60, 0.9);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: #e0e0e0;
+  }
+  .search-input::placeholder {
+    color: rgba(224, 224, 224, 0.5);
+  }
 }
 
 .search-input:focus {
   outline: none;
   border-color: #165DFF;
-  box-shadow: 0 0 0 3px rgba(22, 93, 255, 0.5);
+  box-shadow: 0 0 0 3px rgba(22, 93, 255, 0.3);
+  background-color: rgba(255, 255, 255, 1);
+}
+
+body[class*="from-blue-900"],
+body[class*="from-gray-800"],
+body[class*="from-gray-900"],
+body[class*="from-purple-900"] {
+  .search-input:focus {
+    background-color: rgba(40, 40, 60, 1);
+  }
 }
 
 .btn-primary {
@@ -34,11 +93,14 @@
   padding: 0.75rem 1.5rem;
   border-radius: 9999px;
   transition: all 200ms ease;
+  border: none;
+  cursor: pointer;
 }
 
 .btn-primary:hover {
   background-color: rgba(22, 93, 255, 0.9);
   transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(22, 93, 255, 0.4);
 }
 
 .btn-primary:focus {
@@ -46,6 +108,56 @@
   box-shadow: 0 0 0 3px rgba(22, 93, 255, 0.5);
 }
 
+/* 页面标题样式增强 */
+header h1 {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 暗色背景下的文本样式 */
+body[class*="from-blue-900"],
+body[class*="from-gray-800"],
+body[class*="from-gray-900"],
+body[class*="from-purple-900"] {
+  header h1 {
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  header p {
+    color: rgba(255, 255, 255, 0.8);
+  }
+  .error-message {
+    color: #ff6b6b;
+  }
+  .citySuggestions {
+    background-color: rgba(40, 40, 60, 0.95);
+    color: #e0e0e0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .citySuggestions .hover:bg-gray-100 {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* 城市建议下拉框样式增强 */
+#citySuggestions {
+  background-color: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+#citySuggestions > div:hover {
+  background-color: rgba(22, 93, 255, 0.1);
+}
+
+/* 加载动画增强 */
+#loading {
+  backdrop-filter: blur(5px);
+  padding: 2rem;
+  border-radius: 1rem;
+}
+
+/* 动画定义 */
 .animate-fade-in {
   animation: fadeIn 0.5s ease-in-out;
 }
@@ -54,10 +166,10 @@
   animation: slideUp 0.5s ease-out;
 }
 
-/* 动画定义 */
+/* 背景平滑过渡效果 */
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from { opacity: 0; transform: scale(0.98); }
+  to { opacity: 1; transform: scale(1); }
 }
 
 @keyframes slideUp {
@@ -73,4 +185,26 @@
 
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .weather-card {
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+  }
+}
+
+/* 文字样式增强 */
+h1, h2, h3, h4, h5, h6 {
+  transition: color 0.8s ease;
+}
+
+p, span, div {
+  transition: color 0.8s ease;
+}
+
+/* 图表和图标区域增强 */
+#weatherIcon {
+  filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.2));
 }
