@@ -49,20 +49,29 @@
     
     <!-- 天气结果展示区域 -->
     <div id="weatherResult" class="hidden">
-      <!-- 主要天气信息 -->
-      <div class="weather-card mb-6 animate-slide-up">
-        <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
-          <div>
-            <h2 id="cityName" class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-dark mb-1">北京市</h2>
-            <p id="currentDate" class="text-gray-500"></p>
-          </div>
-          <div class="flex items-center mt-4 md:mt-0">
-            <img id="weatherIcon" src="" alt="天气图标" class="w-16 h-16 mr-3">
-            <div class="text-right">
-              <div id="temperature" class="text-[clamp(2rem,5vw,3rem)] font-bold text-dark">25°C</div>
-              <div id="weatherCondition" class="text-gray-600 text-lg">晴</div>
-            </div>
-          </div>
+      <!-- 城市信息 - 左上角 -->
+      <div class="mb-4">
+        <h2 id="cityName" class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-dark">北京市</h2>
+        <p id="currentDate" class="text-gray-500"></p>
+      </div>
+      
+      <!-- 主要天气信息 - 温度在中间 -->
+      <div class="weather-card mb-6 animate-slide-up text-center">
+        <!-- 天气图标 -->
+        <div class="flex justify-center mb-4">
+          <img id="weatherIcon" src="" alt="天气图标" class="w-24 h-24">
+        </div>
+        
+        <!-- 温度在中间 -->
+        <div id="temperature" class="text-[clamp(3rem,8vw,5rem)] font-bold text-dark mb-3">25°C</div>
+        
+        <!-- 温度下方显示天气状况、最低最高温度和空气质量 -->
+        <div class="flex flex-col sm:flex-row justify-center items-center gap-4 text-gray-600">
+          <div id="weatherCondition" class="text-xl">晴</div>
+          <div class="hidden sm:block">|</div>
+          <div id="tempRange" class="text-lg">18°C ~ 28°C</div>
+          <div class="hidden sm:block">|</div>
+          <div id="airQuality" class="text-lg">空气质量: 良</div>
         </div>
       </div>
       
@@ -106,6 +115,22 @@
             <p class="text-gray-500">气压</p>
             <p id="pressure" class="text-xl font-medium">1013 hPa</p>
           </div>
+        </div>
+      </div>
+      
+      <!-- 24小时天气预报 -->
+      <div class="mt-8 animate-slide-up" style="animation-delay: 0.3s">
+        <h3 class="text-xl font-bold text-dark mb-4">24小时天气预报</h3>
+        <div id="hourlyForecast" class="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
+          <!-- 每小时天气卡片将通过JavaScript动态生成 -->
+        </div>
+      </div>
+      
+      <!-- 5天天气预报 -->
+      <div class="mt-8 animate-slide-up" style="animation-delay: 0.4s">
+        <h3 class="text-xl font-bold text-dark mb-4">未来5天天气预报</h3>
+        <div id="dailyForecast" class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 gap-4">
+          <!-- 每日天气卡片将通过JavaScript动态生成 -->
         </div>
       </div>
     </div>
