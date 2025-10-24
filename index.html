@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>天气查询 | 实时天气预报</title>
+  <!-- 引入Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- 引入Font Awesome -->
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  
+
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="font-inter bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen text-dark">
+  <div class="container mx-auto px-4 py-8 max-w-4xl">
+    <!-- 页面标题 -->
+    <header class="text-center mb-10 animate-fade-in">
+      <h1 class="text-[clamp(2rem,5vw,3rem)] font-bold text-primary mb-2">天气查询</h1>
+      <p class="text-gray-600 text-lg">输入城市名称，获取实时天气信息</p>
+    </header>
+    
+    <!-- 搜索区域 -->
+    <div class="flex flex-col sm:flex-row gap-4 mb-10 animate-fade-in" style="animation-delay: 0.1s">
+      <input 
+        type="text" 
+        id="cityInput" 
+        placeholder="请输入城市名称..." 
+        class="search-input"
+      >
+      <button id="searchBtn" class="btn-primary flex items-center justify-center gap-2">
+        <i class="fa fa-search"></i>
+        <span>查询天气</span>
+      </button>
+    </div>
+    
+    <!-- 加载状态 -->
+    <div id="loading" class="hidden text-center py-10 animate-fade-in">
+      <div class="inline-block w-12 h-12 border-4 border-primary/30 border-t-primary rounded-full animate-spin"></div>
+      <p class="mt-4 text-gray-600">正在获取天气信息...</p>
+    </div>
+    
+    <!-- 错误提示 -->
+    <div id="error" class="hidden weather-card text-center animate-fade-in">
+      <i class="fa fa-exclamation-circle text-red-500 text-4xl mb-4"></i>
+      <p id="errorMessage" class="text-gray-700">未能获取天气信息，请稍后再试</p>
+    </div>
+    
+    <!-- 天气结果展示区域 -->
+    <div id="weatherResult" class="hidden">
+      <!-- 主要天气信息 -->
+      <div class="weather-card mb-6 animate-slide-up">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
+          <div>
+            <h2 id="cityName" class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-dark mb-1">北京市</h2>
+            <p id="currentDate" class="text-gray-500"></p>
+          </div>
+          <div class="flex items-center mt-4 md:mt-0">
+            <img id="weatherIcon" src="" alt="天气图标" class="w-16 h-16 mr-3">
+            <div class="text-right">
+              <div id="temperature" class="text-[clamp(2rem,5vw,3rem)] font-bold text-dark">25°C</div>
+              <div id="weatherCondition" class="text-gray-600 text-lg">晴</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 详细天气信息 -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 animate-slide-up" style="animation-delay: 0.2s">
+        <div class="weather-card flex items-center p-6">
+          <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-primary mr-4">
+            <i class="fa fa-location-arrow text-xl"></i>
+          </div>
+          <div>
+            <p class="text-gray-500">风向风力</p>
+            <p id="windInfo" class="text-xl font-medium">东北风 3级</p>
+          </div>
+        </div>
+        
+        <div class="weather-card flex items-center p-6">
+          <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-primary mr-4">
+            <i class="fa fa-tint text-xl"></i>
+          </div>
+          <div>
+            <p class="text-gray-500">湿度</p>
+            <p id="humidity" class="text-xl font-medium">55%</p>
+          </div>
+        </div>
+        
+        <div class="weather-card flex items-center p-6">
+          <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-primary mr-4">
+            <i class="fa fa-sun-o text-xl"></i>
+          </div>
+          <div>
+            <p class="text-gray-500">体感温度</p>
+            <p id="feelsLike" class="text-xl font-medium">26°C</p>
+          </div>
+        </div>
+        
+        <div class="weather-card flex items-center p-6">
+          <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-primary mr-4">
+            <i class="fa fa-cloud text-xl"></i>
+          </div>
+          <div>
+            <p class="text-gray-500">气压</p>
+            <p id="pressure" class="text-xl font-medium">1013 hPa</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 页脚 -->
+    <footer class="mt-12 text-center text-gray-500 text-sm">
+      <p>数据来源: 开放天气地图 | 设计与开发 © 2023</p>
+    </footer>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
